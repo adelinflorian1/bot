@@ -1,16 +1,21 @@
 import './Messages.css'
+
 import $ from "jquery";
 import React from 'react';
 import Reflux from 'reflux';
 
+import {getAnswer} from '../Controller/MessageController'
 import MessagesActions from '../Actions/MessagesActions';
 import MessagesStore from '../Stores/MessagesStore';
+
+import Loader from '../shared/Loader/Loader'
 
 class Messages extends Reflux.Component {
     constructor( props ){
         super( props );
         this.state = {
             message:'',
+            writing:false,
         };
         this.store = MessagesStore;
     }
@@ -30,7 +35,7 @@ class Messages extends Reflux.Component {
         }
 
         $.ajax(settings).done(function (response) {
-            MessagesActions.setValue(response);
+            MessagesActions.setMessages(response);
         });
     }
 
@@ -43,7 +48,7 @@ class Messages extends Reflux.Component {
     sendMessage(event){
         if(this.state.message==='') return;
         let message = {
-            id: 0,
+            id: -1,
             text: this.state.message,
             timestamp: '12:30',
         }
@@ -66,17 +71,41 @@ class Messages extends Reflux.Component {
           }
         }
 
-        $.ajax(settings).done(function (response) {});
+        $.ajax(settings).done((response) =>{
+            setTimeout(()=>{
+                this.setState({
+                    writing:true,
+                    message:'',
+                });
+            },1000);
+            setTimeout(()=>{
+                let message = {
+                    id: 0,
+                    text: 'Not smart enough, sorry :(',
+                    timestamp: '12:30',
+                }
+                MessagesActions.addMessage(message);
+                this.setState({
+                    writing:false,
+                });
+                getAnswer();
+            },3000);
+        });
     }
 
     render() {
 
+    const writing = {
+        display: this.state.writing ? 'block' : 'none',
+    };
+
     return (
       <div className="container">
+          <div className='scroll'>
           <div className = 'chatbox-wrapper' >
                 {this.state.messages.map( (message,i) =>
                     <div className = 'chatbox-message-wrapper' key={i} >
-                        <div className = { message.id ===0 ? 'chatbox-message chatbox-me' : 'chatbox-message chatbox-others'} >
+                        <div className = { message.id !==0 ? 'chatbox-message chatbox-me' : 'chatbox-message chatbox-others'} >
                             <img src ='https://miro.medium.com/max/480/1*paQ7E6f2VyTKXHpR-aViFg.png' alt='bahooo'/>
                             <span className = 'message'>{message.text}</span>
                             <span className = 'timestamp'>{message.timestamp}</span>
@@ -84,14 +113,20 @@ class Messages extends Reflux.Component {
                     </div>
                 )}
 
-                <div className = 'bottom-text-box' >
-                    <div className = 'text-box'>
-                        <textarea placeholder = 'Write a message...' onChange={this.onChangeMessage.bind(this)}></textarea>
-                        <button className = 'send-button' onClick={this.sendMessage.bind(this)}>Send</button>
-                        <i className="far fa-smile"></i>
+                <div className = 'chatbox-message-wrapper' style={writing}>
+                    <div className = 'chatbox-message chatbox-others'>
+                        <img src ='https://miro.medium.com/max/480/1*paQ7E6f2VyTKXHpR-aViFg.png' alt='bahooo'/>
+                        <Loader/>
                     </div>
                 </div>
-
+            </div>
+            </div>
+            <div className = 'bottom-text-box' >
+                <div className = 'text-box'>
+                    <textarea placeholder = 'Write a message...' onChange={this.onChangeMessage.bind(this)} value={this.state.message}/>
+                    <button className = 'send-button' onClick={this.sendMessage.bind(this)}>Send</button>
+                    <i className="far fa-smile"></i>
+                </div>
             </div>
 
       </div>

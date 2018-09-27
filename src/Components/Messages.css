@@ -3,8 +3,17 @@ body{
 }
 .container{
   width:40%;
+
   background-color: lightgray;
   margin:auto;
+}
+.scroll{
+    max-height: 550px;
+    overflow: auto;
+}
+
+.chatbox-wrapper{
+    position:relative;
 }
 
 .chatbox-message>img{
@@ -82,10 +91,10 @@ body{
 
 .text-box>.send-button{
     position: absolute;
-    right: 5px;
+    right: 0;
     top: 5px;
     height: 45px;
-    width: 23%;
+    width: 25%;
     background-color: #00a1cb;
     border: 0px;
     border-radius: 5px;
@@ -118,8 +127,8 @@ body{
 .text-box>textarea{
     position:absolute;
     top: 5px;
-    left:5px;
-    width:65%;
+    left:0;
+    width:69%;
     height: 35px;
     border: 0px;
     resize: none;

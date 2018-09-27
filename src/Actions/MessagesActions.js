@@ -1,9 +1,8 @@
 import { createActions } from 'reflux';
 
 const MessagesActions = createActions([
-    'setValue',
-    'updateValue',
-    'addMessage'
+    'addMessage',
+    'setMessages',
 ]);
 
 export default MessagesActions;

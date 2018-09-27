@@ -10,7 +10,7 @@ class MessagesStore extends Reflux.Store {
             messages:
             [
                 {
-                    id:1,
+                    id:0,
                     text:'Hi, I am Schocior!.',
                     timestamp: '12:30',
                 },
@@ -20,18 +20,12 @@ class MessagesStore extends Reflux.Store {
         this.listenables = MessagesActions;
 
     }
-
-    onUpdateValue(data){
-        this.onSetValue(data);
-    }
-
-    onSetValue(data) {
-        console.log(data);
-        this.setState({
-            mesages:this.state.messages.concat(data),
-        })
-    }
     onAddMessage(data) {
+        this.setState({
+            messages:this.state.messages.concat(data),
+        });
+    }
+    onSetMessages(data) {
         this.setState({
             messages:this.state.messages.concat(data),
         });
