@@ -1,0 +1,142 @@
+body{
+    background-color: lightblue;
+}
+.container{
+  width:40%;
+  background-color: lightgray;
+  margin:auto;
+}
+
+.chatbox-message>img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.chatbox-message-wrapper{
+    width: 100%;
+    display: block;
+    position: relative;
+    margin: 15px 0px;
+}
+
+.chatbox-message-wrapper::after{
+    content: '';
+    clear: both;
+    display: block;
+    width: 100%;
+}
+
+.chatbox-me{
+    right: 5px;
+    float: right;
+    margin-right: 20px;
+}
+
+.chatbox-others{
+    float: left;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+
+.chatbox-me>img{
+    float: right;
+}
+.chatbox-others>img{
+    float: left;
+}
+
+
+.chatbox-message>.message{
+    display: inline-block;
+    padding: 15px 20px 10px 20px;
+    margin: 0px 10px;
+    max-width: 80%;
+    border-radius: 15px;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+}
+
+.chatbox-me>.message{
+    float:right;
+    color: #ffffff;
+    background-color: #00a1cb;
+    border-top-right-radius: 0px;
+}
+
+.chatbox-others>.message{
+    color: #000000;
+    background-color: #ffffff;
+    border-top-left-radius: 0px;
+}
+
+.timestamp{
+    color: gray;
+    font-size: 10px;
+}
+
+.text-box{
+    height: 55px;
+    background-color: ligh;
+}
+
+.text-box>.send-button{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 45px;
+    width: 23%;
+    background-color: #00a1cb;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.text-box>.send-button:hover{
+    cursor: pointer;
+}
+
+.text-box>.fa-smile{
+    font-size: 35px;
+    top: 10px;
+    position: absolute;
+    right: 110px;
+    color: #9f9f9f;
+}
+
+.text-box>.fa-smile:hover{
+    cursor: pointer;
+}
+
+.bottom-text-box{
+    height: 55px;
+    display: block;
+    position:relative;
+}
+
+.text-box>textarea{
+    position:absolute;
+    top: 5px;
+    left:5px;
+    width:65%;
+    height: 35px;
+    border: 0px;
+    resize: none;
+    padding: 5px;
+    margin: 0px;
+    line-height: 30px;
+    font-size: 18px;
+}
+
+.text-box>.fa-chevron-left{
+    display: none;
+}
+
+.text-box>.fa-chevron-left:hover{
+    cursor: pointer;
+}
+
+.text-box>textarea::placeholder{
+    color: #000000;
+}
