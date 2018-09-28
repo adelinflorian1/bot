@@ -8,7 +8,8 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
-    "reflux": "^6.4.1"
+    "reflux": "^6.4.1",
+    "sentencer": "^0.1.5"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",

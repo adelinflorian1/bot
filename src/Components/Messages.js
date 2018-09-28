@@ -47,31 +47,31 @@ class Messages extends Reflux.Component {
 
     sendMessage(event){
         if(this.state.message==='') return;
-        let message = {
+        var userMessage = {
             id: -1,
             text: this.state.message,
             timestamp: '12:30',
         }
-        MessagesActions.addMessage(message);
+        MessagesActions.addMessage(userMessage);
 
-        var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "http://localhost:3002/message",
-          "method": "POST",
-          "headers": {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzcyNjg4MTAsImV4cCI6MTUzNzM1NTIxMH0.ALd4lUJUihVzK1rZQJsdIh2ToTyv9AJOULzRWMNmlyA",
-            "Cache-Control": "no-cache",
-            "Postman-Token": "893b822b-c64d-4911-9b08-9ca25782be4b"
-          },
-          "data": {
-            "text": this.state.message,
-            "timestamp": "12:30"
-          }
-        }
+        // var settings = {
+        //   "async": true,
+        //   "crossDomain": true,
+        //   "url": "http://localhost:3002/message",
+        //   "method": "POST",
+        //   "headers": {
+        //     "Content-Type": "application/x-www-form-urlencoded",
+        //     "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzcyNjg4MTAsImV4cCI6MTUzNzM1NTIxMH0.ALd4lUJUihVzK1rZQJsdIh2ToTyv9AJOULzRWMNmlyA",
+        //     "Cache-Control": "no-cache",
+        //     "Postman-Token": "893b822b-c64d-4911-9b08-9ca25782be4b"
+        //   },
+        //   "data": {
+        //     "text": this.state.message,
+        //     "timestamp": "12:30"
+        //   }
+        // }
 
-        $.ajax(settings).done((response) =>{
+        //$.ajax(settings).done((response) =>{
             setTimeout(()=>{
                 this.setState({
                     writing:true,
@@ -79,18 +79,12 @@ class Messages extends Reflux.Component {
                 });
             },1000);
             setTimeout(()=>{
-                let message = {
-                    id: 0,
-                    text: 'Not smart enough, sorry :(',
-                    timestamp: '12:30',
-                }
-                MessagesActions.addMessage(message);
                 this.setState({
                     writing:false,
                 });
-                getAnswer();
+                getAnswer(userMessage);
             },3000);
-        });
+        //});
     }
 
     render() {
